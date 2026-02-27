@@ -1,0 +1,143 @@
+---
+title: Configuring BizNode
+description: Customize BizNode's settings for AI memory, network integrations, and optional blockchain registry to fit your business needs.
+---
+
+## Overview
+
+Configure BizNode to match your business requirements. Set environment variables for core operations, integrate semantic memory with Qdrant, enable 1BZ network communications, and optionally connect wallet features for registry verification. These settings run locally from USB, VPS, or your machine without cloud dependencies.
+
+<Callout kind="info">
+Review all environment variables before starting. Use a `.env` file in your BizNode root directory.
+</Callout>
+
+## Quick Configuration Links
+
+<Columns cols={3}>
+  <Card title="Environment Variables" icon="settings" href="#environment-variables">
+    Core settings for AI and network.
+  </Card>
+  <Card title="Qdrant Integration" icon="database" href="#qdrant-integration">
+    Semantic memory setup.
+  </Card>
+  <Card title="1BZ Network" icon="network" href="#1bz-network">
+    Partner communications.
+  </Card>
+  <Card title="Wallet & Registry" icon="wallet" href="#wallet-registry">
+    Optional blockchain features.
+  </Card>
+</Columns>
+
+## Environment Variables
+
+Set these in a `.env` file. Replace placeholders with your values.
+
+| Variable              | Type    | Required | Description |
+|-----------------------|---------|----------|-------------|
+| `BIZNODE_API_KEY`     | string  | Yes      | Your BizNode authentication key. |
+| `QDRANT_URL`          | string  | Yes      | Qdrant server URL, e.g., `http://localhost:6333`. |
+| `TELEGRAM_BOT_TOKEN`  | string  | Yes      | Bot token from BotFather. |
+| `EMAIL_SMTP_HOST`     | string  | Yes      | SMTP server for autonomous emails. |
+| `ONEBZ_REGISTRY_URL`  | string  | No       | Registry endpoint, e.g., `https://registry.1bz.biz`. |
+| `WALLET_PRIVATE_KEY`  | string  | No       | For premium registry verification. |
+
+<Callout kind="tip">
+Restart BizNode after changes: `./biznode restart`.
+</Callout>
+
+## Qdrant Integration
+
+Connect BizNode's AI memory to Qdrant for semantic search and knowledge graph building.
+
+<Steps>
+  <Step title="Install Qdrant" icon="download">
+    Run locally or use Docker.
+
+````dockerfile
+docker run -p 6333:6333 qdrant/qdrant
+````
+  </Step>
+  <Step title="Set Environment" icon="settings">
+    Add to `.env`:
+
+````bash
+QDRANT_URL=http://localhost:6333
+QDRANT_API_KEY=your-qdrant-key
+````
+  </Step>
+  <Step title="Verify Connection" icon="check-circle">
+    Check logs for `Qdrant connected`.
+  </Step>
+</Steps>
+
+## 1BZ Network Configuration
+
+<Tabs>
+  <Tab title="Local Network" icon="network">
+    For peer-to-peer with associates.
+
+<CodeGroup tabs="env,docker">
+````bash
+# .env
+ONEBZ_NETWORK_HOST=localhost:8080
+ONEBZ_PEERS=node1.1bz.biz,node2.1bz.biz
+````
+
+````dockerfile
+environment:
+  - ONEBZ_NETWORK_HOST=localhost:8080
+````
+</CodeGroup>
+  </Tab>
+  <Tab title="VPS Deployment" icon="server">
+    Expose for remote partners.
+
+````bash
+# Firewall rules
+ufw allow 8080
+export ONEBZ_NETWORK_HOST=your-vps-ip:8080
+````
+  </Tab>
+</Tabs>
+
+## Wallet and Registry Features
+
+<Expandable title="Enable Blockchain Registry" default-open="true">
+Optional premium feature. Verify your node on the public registry.
+
+1. Generate wallet address.
+2. Set `WALLET_PRIVATE_KEY=your-private-key-here`.
+3. Run `./biznode register`.
+
+Your page appears at `https://registry.1bz.biz/your-node-id` with business name, status, and Telegram link.
+</Expandable>
+
+<Expandable title="Troubleshooting Registry" default-open="false">
+- Check wallet balance for gas fees.
+- Verify `ONEBZ_REGISTRY_URL=https://registry.1bz.biz`.
+- Logs show registration errors.
+</Expandable>
+
+## Advanced Performance Tweaks
+
+Tune for high-volume operations.
+
+<CodeGroup tabs="Memory,Network">
+````bash
+# Increase memory collection
+MEMORY_BATCH_SIZE=1000
+QDRANT_EMBEDDING_MODEL=qwen2.5
+````
+
+````bash
+# Network optimizations
+NETWORK_TIMEOUT=30s
+MAX_PARTNERS=50
+````
+</CodeGroup>
+
+<Callout kind="alert">
+Test tweaks in staging. Monitor CPU/memory usage.
+</Callout>
+
+For more, see [Quickstart](/quickstart) or [Authentication](/authentication).

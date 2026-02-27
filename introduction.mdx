@@ -1,0 +1,118 @@
+---
+title: Introduction to BizNode
+description: Discover BizNode, the portable AI agent that automates business operations like lead management, email responses, and network interactions without cloud dependency.
+---
+
+<Callout kind="info" title="Starter Kit Template">
+  This documentation was generated as a starter kit template based on your brand. Please review and customize the content to accurately reflect your product's features, APIs, and capabilities.
+</Callout>
+
+## Overview
+
+BizNode is your portable, autonomous AI business operator. It runs from a USB drive, VPS, or local machine, handling lead collection, intelligent email responses, Telegram interactions, and network coordination without relying on cloud services. Build your own self-operating digital executive with local AI powered by Ollama and Qwen2.5, complete with a semantic memory engine.
+
+Perfect for small businesses and networks, BizNode evolves its knowledge base, extracts structured data from leads, and integrates with partner nodes via the 1BZ registry.
+
+## Key Features
+
+<Columns cols={3}>
+  <Card title="AI Memory Engine" icon="database">
+    Self-building semantic graph using SQLite and Qdrant. Stores leads, conversations, and business knowledge for intelligent reasoning.
+  </Card>
+  <Card title="Autonomous Communication" icon="mail">
+    Sends emails and Telegram messages with its own identity. Responds to leads and coordinates with partners automatically.
+  </Card>
+  <Card title="Portable Deployment" icon="hard-drive">
+    Runs offline from USB or any machine. No cloud dependency—network-ready for 1BZ registry verification.
+  </Card>
+</Columns>
+
+<Callout kind="tip">
+  Verified nodes get a public registry page at `https://registry.1bz.biz/{your-node-id}` showing business details, Telegram link, and verification status.
+</Callout>
+
+## Hardware and Software Requirements
+
+BizNode requires minimal resources:
+
+| Requirement | Details |
+|-------------|---------|
+| CPU | Modern x86_64 (Intel/AMD) |
+| RAM | 8GB minimum, 16GB recommended |
+| Storage | 20GB+ for memory graph |
+| OS | Linux, macOS, Windows (Docker recommended) |
+| Network | Internet for initial setup and registry |
+
+It supports Ollama for local AI models like Qwen2.5.
+
+## Quick Start
+
+Get BizNode running in minutes.
+
+<Steps>
+  <Step title="Download" icon="download">
+    Visit [biznode.1bz.biz/download](https://biznode.1bz.biz/#download) and grab the latest portable package.
+  </Step>
+  <Step title="Setup Telegram Bot" icon="message-circle">
+    Create a bot via BotFather and note your `{BOT_TOKEN}`.
+    
+    ```bash
+    export BOT_TOKEN="your-telegram-bot-token-here"
+    ```
+  </Step>
+  <Step title="Configure Email" icon="mail">
+    Set up an email account for the node (e.g., Gmail app password).
+    
+    <CodeGroup tabs="env,docker">
+    ````bash
+    # .env file
+    EMAIL_USER=your-node@biznode.1bz.biz
+    EMAIL_PASS=your-app-password-here
+    ````
+    
+    ````dockerfile
+    # docker-compose.yml
+    environment:
+      - EMAIL_USER=your-node@biznode.1bz.biz
+      - EMAIL_PASS=your-app-password-here
+    ````
+    </CodeGroup>
+  </Step>
+  <Step title="Run Node" icon="play">
+    Launch with Docker or directly:
+    
+    ````bash
+    docker run -d \
+      --env-file .env \
+      -p 8080:8080 \
+      biznode:latest
+    ````
+    
+    Access at `http://localhost:8080`.
+  </Step>
+</Steps>
+
+## Benefits for Small Businesses
+
+BizNode automates routine operations, freeing you to focus on growth. Collect leads via Telegram, send personalized proposals, and build a memory that improves over time. Join the 1BZ network for partner interactions and public verification.
+
+## Next Steps
+
+<Columns cols={2}>
+  <Card title="Quickstart Guide" icon="rocket" href="/quickstart">
+    Detailed setup for production.
+  </Card>
+  <Card title="Authentication" icon="shield" href="/authentication">
+    Secure your node with API keys and registry.
+  </Card>
+  <Card title="Configuration" icon="settings" href="/configuration">
+    Customize memory and AI models.
+  </Card>
+  <Card title="Changelog" icon="git-branch" href="/changelog">
+    Latest updates and releases.
+  </Card>
+</Columns>
+
+<Callout kind="success">
+  Ready to deploy? Follow the [Quickstart](/quickstart) for full setup.
+</Callout>

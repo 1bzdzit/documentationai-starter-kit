@@ -1,0 +1,126 @@
+{
+  "name": "biznode",
+  "template": "classic",
+  "colors": {
+    "light": {
+      "brand": "#2563EB"
+    },
+    "dark": {
+      "brand": "#6F97ED"
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "icon": "book",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "icon": "rocket",
+            "pages": [
+              {
+                "title": "Introduction",
+                "path": "introduction",
+                "icon": "home"
+              },
+              {
+                "title": "Installation",
+                "path": "installation",
+                "icon": "file-text"
+              }
+            ]
+          },
+          {
+            "group": "Usage",
+            "icon": "compass",
+            "pages": [
+              {
+                "title": "Usage",
+                "path": "usage",
+                "icon": "file-text"
+              }
+            ]
+          },
+          {
+            "group": "Configuration",
+            "icon": "settings",
+            "pages": [
+              {
+                "title": "Configuration",
+                "path": "configuration",
+                "icon": "sliders"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "icon": "code",
+        "groups": [
+          {
+            "group": "Endpoints",
+            "openapi": "api-reference/openapi.yaml",
+            "pages": []
+          }
+        ]
+      },
+      {
+        "tab": "Help Center",
+        "icon": "help-circle",
+        "pages": [
+          {
+            "title": "Help Center",
+            "path": "help-center",
+            "icon": "home"
+          },
+          {
+            "group": "FAQs",
+            "icon": "help-circle",
+            "expandable": false,
+            "pages": [
+              {
+                "title": "How to Join DAO",
+                "path": "help-center/faq/how-to-join-dao"
+              }
+            ]
+          },
+          {
+            "group": "Troubleshooting",
+            "icon": "alert-circle",
+            "expandable": false,
+            "pages": [
+              {
+                "title": "Cannot Connect Wallet",
+                "path": "help-center/troubleshooting/cannot-connect-wallet"
+              }
+            ]
+          },
+          {
+            "group": "Guides",
+            "icon": "book-open",
+            "expandable": false,
+            "pages": [
+              {
+                "title": "Submit Proposal",
+                "path": "help-center/guides/submit-proposal"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Changelog",
+        "icon": "clock",
+        "pages": [
+          {
+            "title": "Release History",
+            "path": "changelog",
+            "icon": "history"
+          }
+        ]
+      }
+    ]
+  }
+}

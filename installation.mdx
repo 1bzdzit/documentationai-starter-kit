@@ -1,0 +1,168 @@
+---
+title: Installing BizNode
+description: Step-by-step guide to download and set up BizNode on USB drives, local machines, or VPS for immediate deployment.
+---
+
+## Prerequisites
+
+<Callout kind="info" title="Before You Begin">
+Ensure you have:
+- A machine with at least 4GB RAM and 10GB free disk space
+- Docker installed (for containerized setup)
+- Ollama installed for local AI models (optional but recommended)
+- Telegram bot token from BotFather for full functionality
+</Callout>
+
+## Download BizNode
+
+Download the latest BizNode package from the official site. Choose the portable USB version for maximum flexibility or the installer for your platform.
+
+<Steps>
+<Step title="Visit Download Page" icon="download">
+Navigate to [https://biznode.1bz.biz/download](https://biznode.1bz.biz/download) and select your preferred package.
+</Step>
+
+<Step title="Choose Package" icon="package">
+Select from:
+- Portable USB image (recommended for mobility)
+- Platform-specific installer (Windows, macOS, Linux)
+- Docker image for VPS deployment
+</Step>
+
+<Step title="Verify Download" icon="check-circle">
+Check the SHA256 hash matches the published value to ensure integrity.
+</Step>
+</Steps>
+
+## Platform-Specific Installation
+
+Use the instructions below based on your operating system. BizNode supports native installs and Docker for consistency.
+
+<Tabs>
+<Tab title="Windows" icon="monitor">
+<Steps>
+<Step title="Run Installer">
+Double-click the `.exe` file and follow the wizard.
+</Step>
+<Step title="Set Environment">
+````bash
+setx BIZNODE_HOME "C:\biznode"
+````
+</Step>
+</Steps>
+</Tab>
+
+<Tab title="macOS" icon="apple">
+<Steps>
+<Step title="Extract Archive">
+```bash
+tar -xzf biznode-macos.tar.gz
+```
+</Step>
+<Step title="Install Dependencies">
+```bash
+brew install docker ollama
+```
+</Step>
+</Steps>
+</Tab>
+
+<Tab title="Linux" icon="terminal">
+<Steps>
+<Step title="Extract and Install">
+```bash
+sudo tar -xzf biznode-linux.tar.gz -C /opt/
+sudo ln -s /opt/biznode/bin/biznode /usr/local/bin/
+```
+</Step>
+<Step title="Start Services">
+```bash
+sudo systemctl enable biznode
+```
+</Step>
+</Steps>
+</Tab>
+</Tabs>
+
+## Running from USB for Portability
+
+For portable deployment, use a USB drive formatted as exFAT or NTFS.
+
+<CodeGroup tabs="USB Setup,Docker USB">
+```bash
+# Mount USB and run
+mkdir /mnt/usb
+mount /dev/sdb1 /mnt/usb
+cd /mnt/usb/biznode
+./start.sh
+```
+
+```dockerfile
+# USB-mounted Docker
+docker run -v /mnt/usb:/data biznode:latest
+```
+</CodeGroup>
+
+<Callout kind="tip">
+Eject the USB safely after `biznode stop` to preserve memory state.
+</Callout>
+
+## VPS Deployment Options
+
+Deploy on any VPS provider supporting Docker.
+
+<Columns cols={2}>
+<Card title="DigitalOcean" icon="droplet" href="https://cloud.digitalocean.com" target="_blank">
+One-click Docker droplet.
+</Card>
+<Card title="AWS EC2" icon="cloud" href="https://aws.amazon.com/ec2" target="_blank">
+t3.micro instance recommended.
+</Card>
+<Card title="Linode" icon="server" href="https://linode.com" target="_blank">
+Nanode with Ubuntu 22.04.
+</Card>
+</Columns>
+
+Example Docker command:
+```bash
+docker run -d -p 8080:8080 -v /host/data:/data --name biznode biznode:latest
+```
+
+## Verify Installation
+
+Check if BizNode is running correctly.
+
+<Steps>
+<Step title="Check Status" icon="activity">
+```bash
+biznode status
+```
+Expect output: `AI Memory: Active | Telegram: Connected | Email: Ready`
+</Step>
+
+<Step title="Test Telegram" icon="message-circle">
+Send `/start` to your bot. It should respond with welcome message.
+</Step>
+
+<Step title="Registry Check" icon="globe">
+Visit `https://registry.1bz.biz/your-node-id` to confirm public listing.
+</Step>
+</Steps>
+
+## Next Steps
+
+<Columns cols={3}>
+<Card title="Configure Telegram" icon="settings" href="/authentication">
+Set up your bot token and replies.
+</Card>
+<Card title="AI Memory Setup" icon="brain" href="/configuration">
+Build your knowledge graph.
+</Card>
+<Card title="Network Integration" icon="network" href="/guides">
+Connect to 1BZ partners.
+</Card>
+</Columns>
+
+<Callout kind="success">
+Congratulations! Your BizNode is ready. Monitor logs with `biznode logs` for any issues.
+</Callout>

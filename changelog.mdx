@@ -1,0 +1,152 @@
+---
+title: Changelog
+description: Track the latest updates, bug fixes, and new features in BizNode to stay current with improvements.
+---
+
+## Recent Updates
+
+<Callout kind="info">
+Check your BizNode version by running `biznode --version` in your terminal. Subscribe to notifications via the 1BZ registry at https://registry.1bz.biz to get alerts for new releases.
+</Callout>
+
+<Update label="2024-10-15" description="v1.2.0" tags={["feature", "improvement"]}>
+## New Features
+
+- Added support for Qwen2.5-7B model in local Ollama integration for enhanced reasoning
+- Introduced public registry verification with blockchain timestamping
+- Enabled autonomous email proposal generation using structured templates
+
+## Improvements
+
+- Optimized Qdrant semantic graph queries for 40% faster memory retrieval
+- Enhanced Telegram bot responses with context-aware threading
+
+## Bug Fixes
+
+- Fixed intermittent SQLite connection drops during high-load lead processing
+- Resolved email attachment handling for larger files (>5MB)
+</Update>
+
+<Update label="2024-09-20" description="v1.1.0" tags={["feature", "bugfix"]}>
+## New Features
+
+- Integrated 1BZ network partner discovery via Telegram group polling
+- Added lead extraction from email signatures and attachments
+
+## Improvements
+
+- Improved AI memory persistence with automatic backup to USB drive
+
+## Bug Fixes
+
+- Patched Telegram API rate limiting issues during peak hours
+- Corrected Qdrant vector indexing failures on ARM architectures
+</Update>
+
+<Update label="2024-08-10" description="v1.0.0" tags={["breaking", "feature"]}>
+## New Features
+
+- Initial release of core BizNode infrastructure
+- Autonomous Telegram identity with bot API key management
+- Self-building AI Obsidian memory using SQLite + Qdrant
+
+## Breaking Changes
+
+- Migrated from v0.x config format; see migration guide below
+
+## Bug Fixes
+
+- Stabilized local Ollama model loading on USB-powered nodes
+</Update>
+
+## How to Update
+
+Follow these steps to update your BizNode installation to the latest version.
+
+<Steps>
+  <Step title="Backup Your Data" icon="database">
+    Create a backup of your memory directory:
+    
+````bash
+cp -r ~/.biznode/memory ~/biznode-backup-$(date +%Y%m%d)
+````
+  </Step>
+  
+  <Step title="Download Latest" icon="download">
+    <Tabs>
+      <Tab title="macOS/Linux" icon="apple">
+````bash
+curl -L https://biznode.1bz.biz/download/latest/biznode.tar.gz | tar -xz
+````
+      </Tab>
+      <Tab title="Windows" icon="monitor">
+        Download from https://biznode.1bz.biz/download and extract.
+      </Tab>
+    </Tabs>
+  </Step>
+  
+  <Step title="Install and Restart" icon="rocket">
+    <CodeGroup tabs="bash">
+````bash
+sudo ./biznode install --update
+biznode restart
+````
+    </CodeGroup>
+    
+    Verify with `biznode --version`.
+  </Step>
+</Steps>
+
+<Callout kind="tip">
+After updating, re-verify your node at https://registry.1bz.biz/your-node-id to access premium features like wallet integration.
+</Callout>
+
+## Migration Notes
+
+For v1.0.0 users upgrading from v0.x:
+
+<Expandable title="v0.x to v1.0 Migration" default-open="true">
+Update your config file from the old YAML format:
+
+<CodeGroup tabs="Before,After">
+```yaml
+# Before (v0.x)
+ai:
+  model: qwen2
+memory:
+  path: ./memory.db
+```
+```yaml
+# After (v1.0+)
+ai:
+  engine: ollama
+  model: qwen2.5-7b
+memory:
+  engine: qdrant
+  path: ~/.biznode/memory
+```
+</CodeGroup>
+</Expandable>
+
+## Upcoming Roadmap
+
+<Columns cols={3}>
+  <Card title="v1.3.0" icon="zap" href="#recent-updates">
+    Multi-node federation and advanced analytics dashboard.
+  </Card>
+  <Card title="v1.4.0" icon="shield" href="#">
+    Enhanced security with end-to-end encryption for network interactions.
+  </Card>
+  <Card title="v2.0.0" icon="rocket" href="#">
+    Full blockchain integration for decentralized business registry.
+  </Card>
+</Columns>
+
+## Quick Links
+
+| Action | Link |
+|--------|------|
+| Download Latest | https://biznode.1bz.biz/download |
+| Registry | https://registry.1bz.biz |
+| Telegram Support | @biznode_support |
+| GitHub Issues | https://github.com/1bz-dao/biznode/issues |
